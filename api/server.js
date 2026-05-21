@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 
@@ -140,13 +139,65 @@ app.post('/api/check-code', rateLimit, async (req, res) => {
 });
 
 // ===== SUBMIT LEAD (verified only) =====
-// For now: just logs to console. Wire to GHL/Formspree later.
+const LEAD_WEBHOOK_URL = process.env.LEAD_WEBHOOK_URL;
+
 app.post('/api/submit-lead', rateLimit, async (req, res) => {
   try {
     const lead = req.body;
-    console.log('📥 Lead received:', JSON.stringify(lead, null, 2));
-    // TODO: forward to GHL webhook
-    // await fetch(process.env.GHL_WEBHOOK_URL, { method: 'POST', ... });
+
+    // Format the date nicely for the sheet (Sydney local time)
+    const submittedAt = new Date(lead.submittedAt || Date.now());
+    const formattedDate = submittedAt.toLocaleString('en-AU', {
+      timeZone: 'Australia/Sydney',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit',
+      hour12: false,
+    }).replace(',', '');
+
+    const payload = {
+      date: formattedDate,
+      firstName: lead.firstName || '',
+      mobile: lead.mobile || '',
+      email: lead.email || '',
+      assetType: lead.assetType || '',
+      purpose: lead.purpose || '',
+      abnDuration: lead.abnDuration || '',
+      gst: lead.gst || '',
+      property: lead.property || '',
+      amount: lead.amount || '',
+      credit: lead.credit || '',
+      residency: lead.residency || '',
+      income: lead.income || '',
+      state: lead.state || '',
+      postcode: lead.postcode || '',
+      bestTime: lead.bestTime || '',
+      verified: lead.verified ? 'TRUE' : 'FALSE',
+      source: lead.source || 'quickchoice-quiz',
+    };
+
+    console.log('📥 Lead received:', JSON.stringify(payload, null, 2));
+
+    // Forward to Make webhook (which writes to Google Sheet)
+    if (LEAD_WEBHOOK_URL) {
+      try {
+        const forward = await fetch(LEAD_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!forward.ok) {
+          console.error('Make webhook returned non-OK:', forward.status, await forward.text());
+        } else {
+          console.log('✅ Forwarded to Make webhook');
+        }
+      } catch (fwdErr) {
+        // Don't fail the user-facing response if the webhook is down — log it
+        console.error('Failed to forward to Make:', fwdErr.message);
+      }
+    } else {
+      console.warn('⚠️  LEAD_WEBHOOK_URL not set — lead not forwarded');
+    }
+
     return res.json({ success: true });
   } catch (err) {
     console.error('submit-lead error:', err);
