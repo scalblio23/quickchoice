@@ -219,9 +219,10 @@
     background: var(--bg-soft);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    font-size: 22px;
     transition: all 0.2s;
   }
+  .option-icon svg { display: block; }
+  .option.selected .option-icon svg { stroke: var(--navy-deep); }
   .option.selected .option-icon {
     background: var(--accent);
     color: var(--navy-deep);
@@ -485,6 +486,236 @@
     color: var(--ink-soft);
   }
   .success-list-item svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+  /* ===== SLIDER ===== */
+  .slider-wrap { margin: 16px 0 8px; }
+  .slider-value {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    line-height: 1;
+    text-align: center;
+  }
+  .slider-track { position: relative; margin: 0 auto; max-width: 480px; }
+  input[type="range"].slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--line);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    margin: 0;
+  }
+  input[type="range"].slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px; height: 28px;
+    background: #FFFFFF;
+    border: 3px solid #1FBA5C;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(31,186,92,0.4);
+    transition: transform 0.15s;
+  }
+  input[type="range"].slider::-webkit-slider-thumb:hover { transform: scale(1.1); }
+  input[type="range"].slider::-moz-range-thumb {
+    width: 28px; height: 28px;
+    background: #FFFFFF;
+    border: 3px solid #1FBA5C;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(31,186,92,0.4);
+  }
+  .slider-bounds {
+    display: flex; justify-content: space-between;
+    margin-top: 14px;
+    font-size: 13px; color: var(--ink-mute);
+    font-weight: 500;
+    max-width: 480px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* ===== TWO-BUTTON ROW ===== */
+  .options.row-2 { flex-direction: row; gap: 12px; }
+  .options.row-2 .option {
+    flex: 1; justify-content: center; text-align: center;
+    padding: 22px 16px; flex-direction: column; gap: 8px;
+  }
+  .options.row-2 .option .option-body { text-align: center; }
+  .options.row-2 .option .option-icon,
+  .options.row-2 .option .option-check { display: none; }
+  .options.row-2 .option .option-title { font-size: 17px; font-weight: 700; }
+  @media (max-width: 480px) {
+    .options.row-2 .option { padding: 18px 12px; }
+    .options.row-2 .option .option-title { font-size: 15px; }
+  }
+
+  /* ===== 2x2 GRID ===== */
+  .options.grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .options.grid-2 .option {
+    justify-content: center; text-align: center;
+    padding: 20px 16px; flex-direction: column;
+  }
+  .options.grid-2 .option .option-icon,
+  .options.grid-2 .option .option-check { display: none; }
+  .options.grid-2 .option .option-title { font-size: 16px; font-weight: 700; }
+  @media (max-width: 480px) {
+    .options.grid-2 .option { padding: 16px 10px; }
+    .options.grid-2 .option .option-title { font-size: 14px; }
+  }
+
+  /* ===== STATE + POSTCODE ===== */
+  .field-state-postcode {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  @media (max-width: 480px) {
+    .field-state-postcode { grid-template-columns: 1fr; }
+  }
+  .field select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%230E2A4F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .field select:focus {
+    outline: none;
+    border-color: var(--accent-deep);
+    box-shadow: 0 0 0 3px rgba(165,230,53,0.25);
+  }
+
+  /* ===== SINGLE NAME FIELD ===== */
+  .single-field { margin: 16px 0; }
+  .single-field input {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 17px;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    text-align: center;
+    font-weight: 600;
+  }
+  .single-field input:focus {
+    outline: none;
+    border-color: var(--accent-deep);
+    box-shadow: 0 0 0 3px rgba(165,230,53,0.25);
+  }
+  .single-field input::placeholder { color: #A8B2C2; font-weight: 400; }
+
+
+  /* ===== VERIFICATION STEP ===== */
+  .verify-info {
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 15px;
+    margin: 4px 0 24px;
+  }
+  .verify-info strong { color: var(--navy); font-weight: 700; }
+  .code-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .code-inputs input {
+    width: 48px;
+    height: 56px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--navy);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+  .code-inputs input:focus {
+    outline: none;
+    border-color: var(--accent-deep);
+    box-shadow: 0 0 0 3px rgba(165,230,53,0.25);
+  }
+  .code-inputs input.filled {
+    border-color: var(--navy);
+    background: var(--bg-soft);
+  }
+  @media (max-width: 480px) {
+    .code-inputs { gap: 6px; }
+    .code-inputs input { width: 42px; height: 50px; font-size: 20px; }
+  }
+  .resend-link {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  .resend-link button {
+    background: none;
+    border: none;
+    color: var(--navy);
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-family: inherit;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+  .resend-link button:disabled {
+    color: var(--ink-mute);
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+  .verify-status {
+    margin-top: 12px;
+    font-size: 13px;
+    text-align: center;
+    min-height: 18px;
+  }
+  .verify-status.error { color: #DC2626; font-weight: 600; }
+  .verify-status.success { color: #16A34A; font-weight: 600; }
+  .verify-status.info { color: var(--ink-mute); }
+
+  /* Sending state on Get My Finance Options button */
+  .btn-next.loading {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .btn-next.loading::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #FFFFFF;
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
 </style>
 </head>
 <body>
@@ -525,327 +756,341 @@
 
     <!-- Quiz card -->
     <div class="quiz-card">
-      <!-- STEP 1: Asset type -->
+      <!-- STEP 1: Pre-qualifier -->
       <div class="quiz-step active" data-step="1">
-        <h2 class="step-title">What are you looking to finance?</h2>
-        <p class="step-sub">Select the option that best describes your asset</p>
+        <h2 class="step-title">Are you currently looking for asset finance?</h2>
+        <p class="step-sub">We will help you compare 40+ lenders in under 60 seconds</p>
+        <div class="options row-2" data-question="intent">
+          <button class="option" data-value="yes">
+            <div class="option-body"><div class="option-title">Yes</div></div>
+          </button>
+          <button class="option" data-value="no">
+            <div class="option-body"><div class="option-title">No</div></div>
+          </button>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back" disabled>Back</button>
+          <button class="btn-next" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Asset type -->
+      <div class="quiz-step" data-step="2">
+        <h2 class="step-title">What type of asset are you looking to finance?</h2>
         <div class="options" data-question="assetType">
-          <button class="option" data-value="car_suv">
-            <div class="option-icon">🚗</div>
-            <div class="option-body">
-              <div class="option-title">Car or SUV</div>
-              <div class="option-sub">Passenger vehicle, new or used</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="car">
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-5a2 2 0 012-1.5h10a2 2 0 012 1.5l2 5"/><path d="M3 13h18v5a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H7v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5z"/><circle cx="7" cy="16.5" r="1.5"/><circle cx="17" cy="16.5" r="1.5"/></svg></div>
+            <div class="option-body"><div class="option-title">Car</div></div>
+            <div class="option-check"></div>
+          </button>
+          <button class="option" data-value="suv">
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14l1.5-6a2 2 0 012-1.5h13a2 2 0 012 1.5L22 14"/><path d="M2 14h20v4a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-4z"/><path d="M5 8.5h6v-2M11 8.5h6"/><circle cx="6.5" cy="17" r="1.5"/><circle cx="17.5" cy="17" r="1.5"/></svg></div>
+            <div class="option-body"><div class="option-title">SUV or 4WD</div></div>
+            <div class="option-check"></div>
           </button>
           <button class="option" data-value="ute_van">
-            <div class="option-icon">🛻</div>
-            <div class="option-body">
-              <div class="option-title">Ute or Van</div>
-              <div class="option-sub">Light commercial vehicle</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11l1.5-4a2 2 0 012-1.5h6v6"/><path d="M11 11h11v6a1 1 0 01-1 1h-2"/><path d="M2 11v6a1 1 0 001 1h2"/><line x1="11" y1="5.5" x2="11" y2="11"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="17.5" cy="18" r="1.5"/></svg></div>
+            <div class="option-body"><div class="option-title">Ute or Van</div></div>
+            <div class="option-check"></div>
           </button>
-          <button class="option" data-value="truck_trailer">
-            <div class="option-icon">🚛</div>
-            <div class="option-body">
-              <div class="option-title">Truck or Trailer</div>
-              <div class="option-sub">Medium to heavy commercial</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="truck">
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="13" height="10" rx="1"/><path d="M14 10h5l3 3v4h-8z"/><circle cx="5" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg></div>
+            <div class="option-body"><div class="option-title">Truck or Trailer</div></div>
+            <div class="option-check"></div>
           </button>
           <button class="option" data-value="equipment">
-            <div class="option-icon">🏗️</div>
-            <div class="option-body">
-              <div class="option-title">Equipment or Machinery</div>
-              <div class="option-sub">Excavators, tools, agricultural, industrial</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h12v-4H3z"/><circle cx="6" cy="18" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 14V9h6v5"/><path d="M11 11l5-5 4 2-2 4"/><path d="M16 6l-2-3"/></svg></div>
+            <div class="option-body"><div class="option-title">Equipment or Machinery</div></div>
+            <div class="option-check"></div>
           </button>
           <button class="option" data-value="other">
-            <div class="option-icon">📦</div>
-            <div class="option-body">
-              <div class="option-title">Other business asset</div>
-              <div class="option-sub">IT, fit-out, specialised equipment</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E2A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+            <div class="option-body"><div class="option-title">Other business asset</div></div>
+            <div class="option-check"></div>
           </button>
         </div>
         <div class="step-actions">
-          <button class="btn-back" disabled>← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
         </div>
       </div>
 
-      <!-- STEP 2: Amount -->
-      <div class="quiz-step" data-step="2">
-        <h2 class="step-title">How much do you need to borrow?</h2>
-        <p class="step-sub">Approximate amount — you can refine this later</p>
-        <div class="options" data-question="amount">
-          <button class="option" data-value="under_20k">
-            <div class="option-icon">💵</div>
-            <div class="option-body">
-              <div class="option-title">Under $20,000</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="20k_50k">
-            <div class="option-icon">💵</div>
-            <div class="option-body">
-              <div class="option-title">$20,000 – $50,000</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="50k_100k">
-            <div class="option-icon">💰</div>
-            <div class="option-body">
-              <div class="option-title">$50,000 – $100,000</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="100k_250k">
-            <div class="option-icon">💰</div>
-            <div class="option-body">
-              <div class="option-title">$100,000 – $250,000</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="over_250k">
-            <div class="option-icon">💎</div>
-            <div class="option-body">
-              <div class="option-title">$250,000+</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-        </div>
-        <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: Purpose -->
+      <!-- STEP 3: Personal or business -->
       <div class="quiz-step" data-step="3">
-        <h2 class="step-title">Is this for business or personal use?</h2>
-        <p class="step-sub">This helps us match you with the right lenders</p>
-        <div class="options" data-question="purpose">
-          <button class="option" data-value="business">
-            <div class="option-icon">🏢</div>
-            <div class="option-body">
-              <div class="option-title">Business use</div>
-              <div class="option-sub">I have an active ABN</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
+        <h2 class="step-title">Is this for personal use or business use?</h2>
+        <div class="options row-2" data-question="purpose">
           <button class="option" data-value="personal">
-            <div class="option-icon">👤</div>
-            <div class="option-body">
-              <div class="option-title">Personal use</div>
-              <div class="option-sub">For me or my family</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-body"><div class="option-title">Personal</div></div>
           </button>
-          <button class="option" data-value="mixed">
-            <div class="option-icon">🔄</div>
-            <div class="option-body">
-              <div class="option-title">Mixed use</div>
-              <div class="option-sub">Both business and personal</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="business">
+            <div class="option-body"><div class="option-title">Business</div></div>
           </button>
         </div>
         <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
         </div>
       </div>
 
-      <!-- STEP 4: Employment -->
+      <!-- STEP 4: ABN duration (business only) -->
       <div class="quiz-step" data-step="4">
-        <h2 class="step-title">What's your employment situation?</h2>
-        <p class="step-sub">Lenders match best when this is accurate</p>
-        <div class="options" data-question="employment">
-          <button class="option" data-value="self_employed">
-            <div class="option-icon">💼</div>
-            <div class="option-body">
-              <div class="option-title">Self-employed / Sole trader</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h2 class="step-title">How long have you held your ABN?</h2>
+        <div class="options" data-question="abnDuration">
+          <button class="option" data-value="under_12">
+            <div class="option-body"><div class="option-title">Less than 12 months</div></div>
           </button>
-          <button class="option" data-value="company_director">
-            <div class="option-icon">👔</div>
-            <div class="option-body">
-              <div class="option-title">Company director</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="1_2_years">
+            <div class="option-body"><div class="option-title">1 to 2 years</div></div>
           </button>
-          <button class="option" data-value="fulltime">
-            <div class="option-icon">📋</div>
-            <div class="option-body">
-              <div class="option-title">Full-time employee (PAYG)</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="parttime_casual">
-            <div class="option-icon">⏰</div>
-            <div class="option-body">
-              <div class="option-title">Part-time or casual</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          </button>
-          <button class="option" data-value="other_employment">
-            <div class="option-icon">📝</div>
-            <div class="option-body">
-              <div class="option-title">Other (retired, pension, etc.)</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="over_2">
+            <div class="option-body"><div class="option-title">Over 2 years</div></div>
           </button>
         </div>
         <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
         </div>
       </div>
 
-      <!-- STEP 5: Credit -->
+      <!-- STEP 5: GST registered (business only) -->
       <div class="quiz-step" data-step="5">
-        <h2 class="step-title">How would you rate your credit?</h2>
-        <p class="step-sub">No need to be exact — we work with all credit profiles</p>
+        <h2 class="step-title">Are you registered for GST?</h2>
+        <div class="options row-2" data-question="gst">
+          <button class="option" data-value="yes">
+            <div class="option-body"><div class="option-title">Yes</div></div>
+          </button>
+          <button class="option" data-value="no">
+            <div class="option-body"><div class="option-title">No</div></div>
+          </button>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 6: Property ownership -->
+      <div class="quiz-step" data-step="6">
+        <h2 class="step-title">Do you currently own property?</h2>
+        <p class="step-sub">Property owners often qualify for sharper rates</p>
+        <div class="options row-2" data-question="property">
+          <button class="option" data-value="yes">
+            <div class="option-body"><div class="option-title">Yes</div></div>
+          </button>
+          <button class="option" data-value="no">
+            <div class="option-body"><div class="option-title">No</div></div>
+          </button>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 7: Loan amount slider -->
+      <div class="quiz-step" data-step="7">
+        <h2 class="step-title">How much are you looking to borrow?</h2>
+        <div class="slider-wrap">
+          <div class="slider-value" id="amountValue">$50,000</div>
+          <div class="slider-track">
+            <input type="range" id="amountSlider" class="slider" min="10000" max="500000" step="5000" value="50000">
+          </div>
+          <div class="slider-bounds">
+            <span>$10,000</span>
+            <span>$500,000+</span>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next">Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 8: Credit rating -->
+      <div class="quiz-step" data-step="8">
+        <h2 class="step-title">How would you describe your current credit rating?</h2>
+        <p class="step-sub">No need to be exact, we work with all credit profiles</p>
         <div class="options" data-question="credit">
           <button class="option" data-value="excellent">
-            <div class="option-icon">⭐</div>
-            <div class="option-body">
-              <div class="option-title">Excellent</div>
-              <div class="option-sub">Never missed a payment</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-body"><div class="option-title">Excellent</div></div>
           </button>
           <button class="option" data-value="good">
-            <div class="option-icon">✅</div>
-            <div class="option-body">
-              <div class="option-title">Good</div>
-              <div class="option-sub">A few minor blips</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-body"><div class="option-title">Good</div></div>
           </button>
-          <button class="option" data-value="fair">
-            <div class="option-icon">⚖️</div>
-            <div class="option-body">
-              <div class="option-title">Fair</div>
-              <div class="option-sub">Some defaults or late payments</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="average">
+            <div class="option-body"><div class="option-title">Average</div></div>
+          </button>
+          <button class="option" data-value="below_average">
+            <div class="option-body"><div class="option-title">Below Average</div></div>
           </button>
           <button class="option" data-value="poor">
-            <div class="option-icon">🔧</div>
-            <div class="option-body">
-              <div class="option-title">Poor</div>
-              <div class="option-sub">Several defaults, working to rebuild</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-body"><div class="option-title">Poor</div></div>
           </button>
           <button class="option" data-value="not_sure">
-            <div class="option-icon">❓</div>
-            <div class="option-body">
-              <div class="option-title">Not sure</div>
-              <div class="option-sub">Happy to find out</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-body"><div class="option-title">Not sure</div></div>
           </button>
         </div>
         <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
         </div>
       </div>
 
-      <!-- STEP 6: Timeline -->
-      <div class="quiz-step" data-step="6">
-        <h2 class="step-title">When are you looking to settle?</h2>
-        <p class="step-sub">We can fast-track urgent applications</p>
-        <div class="options" data-question="timeline">
-          <button class="option" data-value="asap">
-            <div class="option-icon">🚀</div>
-            <div class="option-body">
-              <div class="option-title">ASAP — this week</div>
-              <div class="option-sub">Priority handling</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <!-- STEP 9: Residency -->
+      <div class="quiz-step" data-step="9">
+        <h2 class="step-title">Are you a permanent resident or citizen of Australia?</h2>
+        <div class="options" data-question="residency">
+          <button class="option" data-value="citizen">
+            <div class="option-body"><div class="option-title">Australian Citizen</div></div>
           </button>
-          <button class="option" data-value="2weeks">
-            <div class="option-icon">📅</div>
-            <div class="option-body">
-              <div class="option-title">Within 2 weeks</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="permanent">
+            <div class="option-body"><div class="option-title">Permanent Resident</div></div>
           </button>
-          <button class="option" data-value="month">
-            <div class="option-icon">🗓️</div>
-            <div class="option-body">
-              <div class="option-title">This month</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="visa">
+            <div class="option-body"><div class="option-title">Visa Holder</div></div>
           </button>
-          <button class="option" data-value="exploring">
-            <div class="option-icon">🔍</div>
-            <div class="option-body">
-              <div class="option-title">Just exploring options</div>
-              <div class="option-sub">No urgency</div>
-            </div>
-            <div class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <button class="option" data-value="none">
+            <div class="option-body"><div class="option-title">No, I am not</div></div>
           </button>
         </div>
         <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" disabled>Continue →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" disabled>Continue</button>
         </div>
       </div>
 
-      <!-- STEP 7: Contact -->
-      <div class="quiz-step" data-step="7">
-        <h2 class="step-title">Almost done! Where should we send your match?</h2>
-        <p class="step-sub">A finance specialist will be in touch within one business hour</p>
-        <form class="form-fields" id="leadForm" novalidate>
-          <div class="field-row">
-            <div class="field" data-field="firstName">
-              <label for="firstName">First name</label>
-              <input type="text" id="firstName" name="firstName" placeholder="e.g. Jake" autocomplete="given-name" required>
-              <div class="field-error">Please enter your first name</div>
-            </div>
-            <div class="field" data-field="lastName">
-              <label for="lastName">Last name</label>
-              <input type="text" id="lastName" name="lastName" placeholder="e.g. Smith" autocomplete="family-name" required>
-              <div class="field-error">Please enter your last name</div>
-            </div>
+      <!-- STEP 10: Income slider -->
+      <div class="quiz-step" data-step="10">
+        <h2 class="step-title">What is your annual gross income (before tax)?</h2>
+        <div class="slider-wrap">
+          <div class="slider-value" id="incomeValue">$80,000</div>
+          <div class="slider-track">
+            <input type="range" id="incomeSlider" class="slider" min="20000" max="500000" step="5000" value="80000">
           </div>
+          <div class="slider-bounds">
+            <span>$20,000</span>
+            <span>$500,000+</span>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next">Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 11: State + postcode -->
+      <div class="quiz-step" data-step="11">
+        <h2 class="step-title">Which state and postcode do you live in?</h2>
+        <div class="field-state-postcode" style="margin-top: 16px;">
+          <div class="field" data-field="state">
+            <label for="qState">State</label>
+            <select id="qState" name="state" required>
+              <option value="">Select state</option>
+              <option value="ACT">ACT</option>
+              <option value="NSW">NSW</option>
+              <option value="NT">NT</option>
+              <option value="QLD">QLD</option>
+              <option value="SA">SA</option>
+              <option value="TAS">TAS</option>
+              <option value="VIC">VIC</option>
+              <option value="WA">WA</option>
+            </select>
+          </div>
+          <div class="field" data-field="postcode">
+            <label for="qPostcode">Postcode</label>
+            <input type="text" id="qPostcode" name="postcode" placeholder="e.g. 2000" inputmode="numeric" maxlength="4" required>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="locationNext" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 12: Name -->
+      <div class="quiz-step" data-step="12">
+        <h2 class="step-title">Who do we have the pleasure of helping today?</h2>
+        <div class="single-field">
+          <input type="text" id="qFirstName" name="firstName" placeholder="Enter your first name" autocomplete="given-name" required>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="nameNext" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 13: Mobile + email + consent -->
+      <div class="quiz-step" data-step="13">
+        <h2 class="step-title">How can we reach you with the best finance options?</h2>
+        <form class="form-fields" id="leadForm" novalidate>
           <div class="field" data-field="mobile">
-            <label for="mobile">Mobile number</label>
-            <input type="tel" id="mobile" name="mobile" placeholder="04XX XXX XXX" autocomplete="tel" inputmode="tel" required>
+            <label for="qMobile">Mobile Number</label>
+            <input type="tel" id="qMobile" name="mobile" placeholder="04XX XXX XXX" autocomplete="tel" inputmode="tel" required>
             <div class="field-error">Please enter a valid Australian mobile number</div>
           </div>
           <div class="field" data-field="email">
-            <label for="email">Email address</label>
-            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
+            <label for="qEmail">Email Address</label>
+            <input type="email" id="qEmail" name="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
             <div class="field-error">Please enter a valid email address</div>
-          </div>
-          <div class="field" data-field="postcode">
-            <label for="postcode">Postcode</label>
-            <input type="text" id="postcode" name="postcode" placeholder="e.g. 2000" autocomplete="postal-code" inputmode="numeric" maxlength="4" required>
-            <div class="field-error">Please enter a valid 4-digit postcode</div>
           </div>
           <div class="consent">
             <input type="checkbox" id="consent" required>
-            <label for="consent">I agree to be contacted by Quick Choice Finance Solutions about my application and have read the <a href="#" target="_blank">Privacy Policy</a>.</label>
+            <label for="consent">By ticking the box, you agree to Quick Choice Finance Solutions providing your details to a finance expert. You agree to receive communications from Quick Choice and third party companies or its representatives. <a href="#" target="_blank">Privacy Policy</a></label>
           </div>
         </form>
         <div class="step-actions">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="submitBtn" disabled>Get My Match →</button>
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="contactNext" disabled>Get My Finance Options</button>
+        </div>
+      </div>
+
+      <!-- STEP 13b: SMS Verification -->
+      <div class="quiz-step" data-step="13b">
+        <h2 class="step-title">Verify your mobile number</h2>
+        <p class="verify-info">We've sent a 6-digit code to <strong id="verifyMobileDisplay"></strong></p>
+        <div class="code-inputs" id="codeInputs">
+          <input type="tel" inputmode="numeric" maxlength="1" autocomplete="one-time-code" />
+          <input type="tel" inputmode="numeric" maxlength="1" />
+          <input type="tel" inputmode="numeric" maxlength="1" />
+          <input type="tel" inputmode="numeric" maxlength="1" />
+          <input type="tel" inputmode="numeric" maxlength="1" />
+          <input type="tel" inputmode="numeric" maxlength="1" />
+        </div>
+        <div class="verify-status info" id="verifyStatus"></div>
+        <div class="resend-link">
+          Didn't get it? <button type="button" id="resendBtn" disabled>Resend code (30s)</button>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="verifyNext" disabled>Verify and Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 14: Best time to call -->
+      <div class="quiz-step" data-step="14">
+        <h2 class="step-title">If we need to follow up, when is the best time to reach you?</h2>
+        <div class="options grid-2" data-question="bestTime">
+          <button class="option" data-value="morning">
+            <div class="option-body"><div class="option-title">Morning</div></div>
+          </button>
+          <button class="option" data-value="afternoon">
+            <div class="option-body"><div class="option-title">Afternoon</div></div>
+          </button>
+          <button class="option" data-value="after_5pm">
+            <div class="option-body"><div class="option-title">After 5pm</div></div>
+          </button>
+          <button class="option" data-value="whenever">
+            <div class="option-body"><div class="option-title">Whenever</div></div>
+          </button>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="finalSubmit" disabled>Submit</button>
         </div>
       </div>
 
       <!-- SUCCESS -->
-      <div class="quiz-step" data-step="8">
+      <div class="quiz-step" data-step="15">
         <div class="success-screen">
           <div class="success-icon">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -891,136 +1136,366 @@
 
 <script>
 (function() {
-  const TOTAL_STEPS = 7;
-  let currentStep = 1;
+  // ===== CONFIG =====
+  // Your Railway API service URL — set this once your API is deployed.
+  // For local dev you could use http://localhost:8080
+  const API_BASE = 'https://quickchoice-api-production.up.railway.app';
+
+  let verifiedMobile = null;
+  let resendTimer = null;
+  let flowSequence = [];
+  let currentIndex = 0;
   const responses = {};
 
-  const steps = document.querySelectorAll('.quiz-step');
+  function buildFlow() {
+    if (responses.purpose === 'personal') {
+      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, '13b', 14];
+    } else {
+      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, '13b', 14];
+    }
+  }
+  buildFlow();
+
   const progressFill = document.getElementById('progressFill');
   const currentStepEl = document.getElementById('currentStep');
+  const totalStepsEl = document.getElementById('totalSteps');
   const progressPct = document.getElementById('progressPct');
 
   function updateProgress() {
-    const pct = Math.round(((currentStep - 1) / TOTAL_STEPS) * 100);
+    const totalSteps = flowSequence.length;
+    const pct = Math.round((currentIndex / totalSteps) * 100);
     progressFill.style.width = pct + '%';
     progressPct.textContent = pct + '%';
-    currentStepEl.textContent = Math.min(currentStep, TOTAL_STEPS);
+    currentStepEl.textContent = Math.min(currentIndex + 1, totalSteps);
+    totalStepsEl.textContent = totalSteps;
   }
 
-  function showStep(n) {
-    steps.forEach(s => s.classList.remove('active'));
-    const target = document.querySelector(`.quiz-step[data-step="${n}"]`);
+  function showStep(index) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    const stepNumber = flowSequence[index];
+    const target = document.querySelector('.quiz-step[data-step="' + stepNumber + '"]');
     if (target) target.classList.add('active');
-    currentStep = n;
+    currentIndex = index;
     updateProgress();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Option selection
+  function next() {
+    if (currentIndex < flowSequence.length - 1) showStep(currentIndex + 1);
+  }
+  function back() {
+    if (currentIndex > 0) showStep(currentIndex - 1);
+  }
+
+  // Option selection with auto-advance
   document.querySelectorAll('.options').forEach(group => {
     const question = group.dataset.question;
     const stepEl = group.closest('.quiz-step');
     const nextBtn = stepEl.querySelector('.btn-next');
+    const stepNumber = parseInt(stepEl.dataset.step);
 
     group.querySelectorAll('.option').forEach(opt => {
       opt.addEventListener('click', () => {
         group.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
         opt.classList.add('selected');
-        responses[question] = opt.dataset.value;
-        nextBtn.disabled = false;
+        const value = opt.dataset.value;
+        responses[question] = value;
 
-        // Auto-advance after a short delay
-        setTimeout(() => {
-          if (currentStep < TOTAL_STEPS) showStep(currentStep + 1);
-        }, 350);
+        if (question === 'intent' && value === 'no') {
+          setTimeout(() => {
+            alert("No problem! Come back when you are ready to compare lenders.");
+          }, 200);
+          return;
+        }
+
+        if (question === 'purpose') buildFlow();
+
+        if (nextBtn) nextBtn.disabled = false;
+
+        if (stepNumber === 14) {
+          setTimeout(submitLead, 400);
+          return;
+        }
+        setTimeout(next, 350);
       });
     });
   });
 
-  // Back buttons
   document.querySelectorAll('.btn-back').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (currentStep > 1) showStep(currentStep - 1);
-    });
+    btn.addEventListener('click', back);
   });
 
-  // Manual next (for desktop users who prefer it)
   document.querySelectorAll('.btn-next').forEach(btn => {
-    if (btn.id === 'submitBtn') return;
-    btn.addEventListener('click', () => {
-      if (currentStep < TOTAL_STEPS) showStep(currentStep + 1);
+    if (btn.id === 'contactNext' || btn.id === 'finalSubmit') return;
+    btn.addEventListener('click', (e) => {
+      if (!btn.disabled) next();
     });
   });
 
-  // ===== FORM VALIDATION (Step 7) =====
-  const form = document.getElementById('leadForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const consent = document.getElementById('consent');
+  // Sliders
+  function formatCurrency(val, max) {
+    const n = parseInt(val);
+    if (n >= max) return '$' + max.toLocaleString() + '+';
+    return '$' + n.toLocaleString();
+  }
+  function setupSlider(sliderId, valueId, max) {
+    const slider = document.getElementById(sliderId);
+    const valueEl = document.getElementById(valueId);
+    if (!slider) return;
+    function update() {
+      const val = slider.value;
+      valueEl.textContent = formatCurrency(val, max);
+      const pct = ((val - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = 'linear-gradient(90deg, #1FBA5C 0%, #1FBA5C ' + pct + '%, #E2E7EF ' + pct + '%, #E2E7EF 100%)';
+      responses[sliderId.replace('Slider', '')] = val;
+    }
+    slider.addEventListener('input', update);
+    update();
+  }
+  setupSlider('amountSlider', 'amountValue', 500000);
+  setupSlider('incomeSlider', 'incomeValue', 500000);
 
-  const validators = {
-    firstName: v => v.trim().length >= 2,
-    lastName: v => v.trim().length >= 2,
-    mobile: v => /^(\+?61|0)4\d{8}$/.test(v.replace(/\s/g, '')),
-    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
-    postcode: v => /^\d{4}$/.test(v.trim()),
-  };
+  // State + postcode
+  const qState = document.getElementById('qState');
+  const qPostcode = document.getElementById('qPostcode');
+  const locationNext = document.getElementById('locationNext');
+  function checkLocation() {
+    const valid = qState.value && /^\d{4}$/.test(qPostcode.value.trim());
+    if (locationNext) locationNext.disabled = !valid;
+    if (valid) {
+      responses.state = qState.value;
+      responses.postcode = qPostcode.value.trim();
+    }
+  }
+  if (qState) qState.addEventListener('change', checkLocation);
+  if (qPostcode) qPostcode.addEventListener('input', checkLocation);
 
-  function validateField(name) {
-    const fieldEl = form.querySelector(`[data-field="${name}"]`);
-    const input = fieldEl.querySelector('input');
-    const isValid = validators[name](input.value);
-    fieldEl.classList.toggle('error', !isValid && input.value.length > 0);
-    return isValid;
+  // Name
+  const qFirstName = document.getElementById('qFirstName');
+  const nameNext = document.getElementById('nameNext');
+  if (qFirstName) {
+    qFirstName.addEventListener('input', () => {
+      const valid = qFirstName.value.trim().length >= 2;
+      if (nameNext) nameNext.disabled = !valid;
+      if (valid) responses.firstName = qFirstName.value.trim();
+    });
   }
 
-  function checkFormValid() {
-    const allValid = Object.keys(validators).every(name => {
-      const input = form.querySelector(`#${name}`);
-      return validators[name](input.value);
-    });
-    submitBtn.disabled = !(allValid && consent.checked);
-  }
+  // Contact
+  const qMobile = document.getElementById('qMobile');
+  const qEmail = document.getElementById('qEmail');
+  const consentBox = document.getElementById('consent');
+  const contactNext = document.getElementById('contactNext');
 
-  form.querySelectorAll('input').forEach(input => {
-    input.addEventListener('blur', () => {
-      if (validators[input.name]) validateField(input.name);
-    });
-    input.addEventListener('input', checkFormValid);
+  function validateMobile(v) {
+    return /^(\+?61|0)4\d{8}$/.test(v.replace(/\s/g, ''));
+  }
+  function validateEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  }
+  function checkContact() {
+    const mValid = validateMobile(qMobile.value);
+    const eValid = validateEmail(qEmail.value);
+    const cValid = consentBox.checked;
+    document.querySelector('[data-field="mobile"]').classList.toggle('error', !mValid && qMobile.value.length > 5);
+    document.querySelector('[data-field="email"]').classList.toggle('error', !eValid && qEmail.value.length > 3);
+    if (contactNext) contactNext.disabled = !(mValid && eValid && cValid);
+    if (mValid) responses.mobile = qMobile.value.trim();
+    if (eValid) responses.email = qEmail.value.trim();
+  }
+  [qMobile, qEmail].forEach(el => {
+    if (el) el.addEventListener('input', checkContact);
   });
-  consent.addEventListener('change', checkFormValid);
+  if (consentBox) consentBox.addEventListener('change', checkContact);
+  if (contactNext) {
+    contactNext.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (contactNext.disabled) return;
 
-  // Submit
-  submitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    // Collect all data
+      contactNext.classList.add('loading');
+      contactNext.textContent = 'Sending code';
+
+      try {
+        const r = await fetch(API_BASE + '/api/send-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile: qMobile.value.trim() }),
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Could not send code');
+
+        // Show the verify step
+        document.getElementById('verifyMobileDisplay').textContent = qMobile.value.trim();
+        startResendTimer();
+        next();
+        // Auto-focus first code box
+        setTimeout(() => {
+          const first = document.querySelector('#codeInputs input');
+          if (first) first.focus();
+        }, 400);
+      } catch (err) {
+        alert('Could not send verification code: ' + err.message);
+      } finally {
+        contactNext.classList.remove('loading');
+        contactNext.textContent = 'Get My Finance Options';
+      }
+    });
+  }
+
+
+  // ===== SMS VERIFICATION =====
+  const codeInputs = document.querySelectorAll('#codeInputs input');
+  const verifyNext = document.getElementById('verifyNext');
+  const verifyStatus = document.getElementById('verifyStatus');
+  const resendBtn = document.getElementById('resendBtn');
+
+  function getCode() {
+    return Array.from(codeInputs).map(i => i.value).join('');
+  }
+
+  function setVerifyStatus(msg, cls) {
+    if (!verifyStatus) return;
+    verifyStatus.textContent = msg;
+    verifyStatus.className = 'verify-status ' + (cls || 'info');
+  }
+
+  codeInputs.forEach((input, i) => {
+    input.addEventListener('input', (e) => {
+      const v = e.target.value.replace(/\D/g, '');
+      e.target.value = v.slice(-1);
+      e.target.classList.toggle('filled', !!e.target.value);
+      if (e.target.value && i < codeInputs.length - 1) {
+        codeInputs[i + 1].focus();
+      }
+      const code = getCode();
+      verifyNext.disabled = code.length !== 6;
+      if (code.length === 6) {
+        // Auto-attempt verification
+        attemptVerify();
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !e.target.value && i > 0) {
+        codeInputs[i - 1].focus();
+      }
+    });
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+      pasted.split('').forEach((d, idx) => {
+        if (codeInputs[idx]) {
+          codeInputs[idx].value = d;
+          codeInputs[idx].classList.add('filled');
+        }
+      });
+      const code = getCode();
+      verifyNext.disabled = code.length !== 6;
+      if (code.length === 6) attemptVerify();
+    });
+  });
+
+  async function attemptVerify() {
+    const code = getCode();
+    if (code.length !== 6) return;
+
+    verifyNext.classList.add('loading');
+    verifyNext.disabled = true;
+    setVerifyStatus('Checking code...', 'info');
+
+    try {
+      const r = await fetch(API_BASE + '/api/check-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mobile: qMobile.value.trim(), code }),
+      });
+      const data = await r.json();
+
+      if (r.ok && data.verified) {
+        verifiedMobile = data.phone;
+        setVerifyStatus('Verified!', 'success');
+        setTimeout(next, 600);
+      } else {
+        setVerifyStatus(data.error || 'Incorrect code. Try again.', 'error');
+        codeInputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+        codeInputs[0].focus();
+        verifyNext.disabled = true;
+      }
+    } catch (err) {
+      setVerifyStatus('Network error. Try again.', 'error');
+    } finally {
+      verifyNext.classList.remove('loading');
+    }
+  }
+
+  if (verifyNext) verifyNext.addEventListener('click', attemptVerify);
+
+  function startResendTimer() {
+    if (!resendBtn) return;
+    let secs = 30;
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Resend code (' + secs + 's)';
+    clearInterval(resendTimer);
+    resendTimer = setInterval(() => {
+      secs -= 1;
+      if (secs <= 0) {
+        clearInterval(resendTimer);
+        resendBtn.disabled = false;
+        resendBtn.textContent = 'Resend code';
+      } else {
+        resendBtn.textContent = 'Resend code (' + secs + 's)';
+      }
+    }, 1000);
+  }
+
+  if (resendBtn) {
+    resendBtn.addEventListener('click', async () => {
+      resendBtn.disabled = true;
+      setVerifyStatus('Sending new code...', 'info');
+      try {
+        const r = await fetch(API_BASE + '/api/send-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile: qMobile.value.trim() }),
+        });
+        if (!r.ok) throw new Error();
+        setVerifyStatus('New code sent', 'success');
+        startResendTimer();
+      } catch {
+        setVerifyStatus('Could not resend. Try again in a moment.', 'error');
+        resendBtn.disabled = false;
+      }
+    });
+  }
+
+  async function submitLead() {
     const formData = {
       ...responses,
-      firstName: document.getElementById('firstName').value.trim(),
-      lastName: document.getElementById('lastName').value.trim(),
-      mobile: document.getElementById('mobile').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      postcode: document.getElementById('postcode').value.trim(),
+      mobile: verifiedMobile || responses.mobile,
+      verified: !!verifiedMobile,
       submittedAt: new Date().toISOString(),
+      source: 'quickchoice-quiz',
     };
 
-    // TODO: Wire to Formspree / GHL / your backend
-    // Example with fetch:
-    // fetch('https://formspree.io/f/YOUR_ID', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    //   body: JSON.stringify(formData),
-    // });
+    try {
+      await fetch(API_BASE + '/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+    } catch (err) {
+      console.error('Lead submit failed:', err);
+    }
 
     console.log('Lead captured:', formData);
 
-    // Show success screen
-    showStep(8);
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.querySelector('.quiz-step[data-step="15"]').classList.add('active');
     progressFill.style.width = '100%';
     progressPct.textContent = '100%';
-    currentStepEl.textContent = TOTAL_STEPS;
-  });
+    currentStepEl.textContent = flowSequence.length;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-  // Initial state
   updateProgress();
 })();
 </script>
