@@ -390,22 +390,26 @@
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 20px 30px;
+    padding: 16px 24px;
     display: flex; align-items: center; justify-content: center;
     min-width: 170px;
-    height: 78px;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.02em;
+    height: 90px;
     flex-shrink: 0;
     transition: all 0.2s;
   }
+  .lender img {
+    max-height: 44px;
+    max-width: 130px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
   .lender:hover { border-color: var(--accent-deep); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
   @media (max-width: 720px) {
-    .lender { min-width: 130px; height: 64px; padding: 14px 20px; font-size: 16px; }
-    .lender-track { gap: 12px; animation-duration: 24s; }
+    .lender { min-width: 130px; height: 70px; padding: 12px 18px; }
+    .lender img { max-height: 36px; max-width: 100px; }
+    .lender-track { gap: 12px; animation-duration: 28s; }
   }
 
   /* ===== AS SEEN IN ===== */
@@ -798,30 +802,30 @@
   </div>
   <div class="lender-marquee">
     <div class="lender-track">
-      <div class="lender">Pepper Money</div>
-      <div class="lender">Plenti</div>
-      <div class="lender">Liberty</div>
-      <div class="lender">Wisr</div>
-      <div class="lender">Finance One</div>
-      <div class="lender">Latitude</div>
-      <div class="lender">Money3</div>
-      <div class="lender">Firstmac</div>
-      <div class="lender">Macquarie</div>
-      <div class="lender">Westpac</div>
-      <div class="lender">ANZ</div>
-      <div class="lender">CommBank</div>
-      <div class="lender">Pepper Money</div>
-      <div class="lender">Plenti</div>
-      <div class="lender">Liberty</div>
-      <div class="lender">Wisr</div>
-      <div class="lender">Finance One</div>
-      <div class="lender">Latitude</div>
-      <div class="lender">Money3</div>
-      <div class="lender">Firstmac</div>
-      <div class="lender">Macquarie</div>
-      <div class="lender">Westpac</div>
-      <div class="lender">ANZ</div>
-      <div class="lender">CommBank</div>
+      <div class="lender"><img src="/commbank.png" alt="Commonwealth Bank" loading="lazy" /></div>
+      <div class="lender"><img src="/westpac.png" alt="Westpac" loading="lazy" /></div>
+      <div class="lender"><img src="/anz.png" alt="ANZ" loading="lazy" /></div>
+      <div class="lender"><img src="/macquarie.png" alt="Macquarie" loading="lazy" /></div>
+      <div class="lender"><img src="/pepper.png" alt="Pepper Money" loading="lazy" /></div>
+      <div class="lender"><img src="/plenti.png" alt="Plenti" loading="lazy" /></div>
+      <div class="lender"><img src="/liberty.png" alt="Liberty Financial" loading="lazy" /></div>
+      <div class="lender"><img src="/latitude.png" alt="Latitude Financial" loading="lazy" /></div>
+      <div class="lender"><img src="/wisr.png" alt="Wisr" loading="lazy" /></div>
+      <div class="lender"><img src="/firstmac.png" alt="Firstmac" loading="lazy" /></div>
+      <div class="lender"><img src="/money3.png" alt="Money3" loading="lazy" /></div>
+      <div class="lender"><img src="/financeone.png" alt="Finance One" loading="lazy" /></div>
+      <div class="lender"><img src="/commbank.png" alt="Commonwealth Bank" loading="lazy" /></div>
+      <div class="lender"><img src="/westpac.png" alt="Westpac" loading="lazy" /></div>
+      <div class="lender"><img src="/anz.png" alt="ANZ" loading="lazy" /></div>
+      <div class="lender"><img src="/macquarie.png" alt="Macquarie" loading="lazy" /></div>
+      <div class="lender"><img src="/pepper.png" alt="Pepper Money" loading="lazy" /></div>
+      <div class="lender"><img src="/plenti.png" alt="Plenti" loading="lazy" /></div>
+      <div class="lender"><img src="/liberty.png" alt="Liberty Financial" loading="lazy" /></div>
+      <div class="lender"><img src="/latitude.png" alt="Latitude Financial" loading="lazy" /></div>
+      <div class="lender"><img src="/wisr.png" alt="Wisr" loading="lazy" /></div>
+      <div class="lender"><img src="/firstmac.png" alt="Firstmac" loading="lazy" /></div>
+      <div class="lender"><img src="/money3.png" alt="Money3" loading="lazy" /></div>
+      <div class="lender"><img src="/financeone.png" alt="Finance One" loading="lazy" /></div>
     </div>
   </div>
 </section>
