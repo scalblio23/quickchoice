@@ -1064,10 +1064,9 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
       <!-- STEP 13b: SMS Verification -->
       <div class="quiz-step" data-step="13b">
         <h2 class="step-title">Verify your mobile number</h2>
-        <p class="verify-info">We've sent a 6-digit code to <strong id="verifyMobileDisplay"></strong></p>
+        <p class="verify-info">We've sent a verification code to <strong id="verifyMobileDisplay"></strong></p>
         <div class="code-inputs" id="codeInputs">
           <input type="tel" inputmode="numeric" maxlength="1" autocomplete="one-time-code" />
-          <input type="tel" inputmode="numeric" maxlength="1" />
           <input type="tel" inputmode="numeric" maxlength="1" />
           <input type="tel" inputmode="numeric" maxlength="1" />
           <input type="tel" inputmode="numeric" maxlength="1" />
@@ -1396,8 +1395,8 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         codeInputs[i + 1].focus();
       }
       const code = getCode();
-      verifyNext.disabled = code.length !== 6;
-      if (code.length === 6) {
+      verifyNext.disabled = code.length !== 5;
+      if (code.length === 5) {
         // Auto-attempt verification
         attemptVerify();
       }
@@ -1409,7 +1408,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     });
     input.addEventListener('paste', (e) => {
       e.preventDefault();
-      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 5);
       pasted.split('').forEach((d, idx) => {
         if (codeInputs[idx]) {
           codeInputs[idx].value = d;
@@ -1417,14 +1416,14 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         }
       });
       const code = getCode();
-      verifyNext.disabled = code.length !== 6;
-      if (code.length === 6) attemptVerify();
+      verifyNext.disabled = code.length !== 5;
+      if (code.length === 5) attemptVerify();
     });
   });
 
   async function attemptVerify() {
     const code = getCode();
-    if (code.length !== 6) return;
+    if (code.length !== 5) return;
 
     verifyNext.classList.add('loading');
     verifyNext.disabled = true;
