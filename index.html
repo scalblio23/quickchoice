@@ -230,7 +230,7 @@
   @media (max-width: 720px) {
     .hero-image-wrap { margin-top: 28px; border-radius: 16px; aspect-ratio: 4/3; }
   }
-  .hero-image-wrap svg { width: 100%; height: 100%; display: block; }
+  .hero-image-wrap svg, .hero-image-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 
   /* Stat overlay on hero image */
   .hero-stat-card {
@@ -688,7 +688,7 @@
     </div>
 
     <h1 class="headline fade-up">
-      <strong>Great Rate Guaranteed.</strong> We'll Compare <span class="accent">40+ Lenders</span> to Get You the Best Asset Finance Possible
+      <strong>Lowest Rate Guaranteed.</strong> We Pit <span class="accent">40+ Lenders</span> Against Each Other to Find Your Best Asset Finance Deal
     </h1>
 
     <p class="subhead fade-up d1">
@@ -717,111 +717,7 @@
 
     <!-- HERO IMAGE -->
     <div class="hero-image-wrap fade-up d2">
-      <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <!-- Sky gradient -->
-          <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FFC97D"/>
-            <stop offset="30%" stop-color="#F5A065"/>
-            <stop offset="70%" stop-color="#E07A4A"/>
-            <stop offset="100%" stop-color="#9C4429"/>
-          </linearGradient>
-          <!-- Sun glow -->
-          <radialGradient id="sun" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#FFF2C4" stop-opacity="0.9"/>
-            <stop offset="50%" stop-color="#FFD580" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#FFD580" stop-opacity="0"/>
-          </radialGradient>
-          <!-- Ground gradient -->
-          <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#3D2516"/>
-            <stop offset="100%" stop-color="#1A0F0A"/>
-          </linearGradient>
-          <!-- Vehicle body -->
-          <linearGradient id="vehicleBody" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#F5F5F5"/>
-            <stop offset="50%" stop-color="#E8E8E8"/>
-            <stop offset="100%" stop-color="#BCBCBC"/>
-          </linearGradient>
-          <!-- Vehicle window -->
-          <linearGradient id="window" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#2A1810" stop-opacity="0.85"/>
-            <stop offset="100%" stop-color="#4D2E1F" stop-opacity="0.7"/>
-          </linearGradient>
-          <!-- Wheel -->
-          <radialGradient id="wheel" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#5C5C5C"/>
-            <stop offset="60%" stop-color="#2A2A2A"/>
-            <stop offset="100%" stop-color="#0F0F0F"/>
-          </radialGradient>
-        </defs>
-
-        <!-- Sky -->
-        <rect width="1200" height="450" fill="url(#sky)"/>
-        <!-- Sun -->
-        <circle cx="850" cy="280" r="220" fill="url(#sun)"/>
-        <circle cx="850" cy="280" r="60" fill="#FFF8E0" opacity="0.95"/>
-
-        <!-- Distant mountains/hills -->
-        <path d="M 0 380 L 100 340 L 220 360 L 340 320 L 460 350 L 580 310 L 720 340 L 860 300 L 1000 330 L 1200 310 L 1200 450 L 0 450 Z" fill="#6B2F1F" opacity="0.55"/>
-        <path d="M 0 410 L 140 380 L 280 400 L 420 370 L 580 395 L 740 365 L 900 385 L 1050 360 L 1200 380 L 1200 450 L 0 450 Z" fill="#4A1E12" opacity="0.7"/>
-
-        <!-- Ground -->
-        <rect y="450" width="1200" height="225" fill="url(#ground)"/>
-        <!-- Road -->
-        <path d="M 0 580 L 1200 540 L 1200 590 L 0 640 Z" fill="#2D2520"/>
-        <path d="M 200 580 L 280 575 L 290 580 L 210 585 Z M 400 565 L 480 560 L 490 565 L 410 570 Z M 600 550 L 680 545 L 690 550 L 610 555 Z M 800 535 L 880 530 L 890 535 L 810 540 Z" fill="#D4A537" opacity="0.7"/>
-
-        <!-- Outback vegetation silhouettes -->
-        <g opacity="0.6">
-          <path d="M 100 430 L 105 410 L 108 425 L 112 408 L 115 430 Z" fill="#1A0F0A"/>
-          <path d="M 250 425 L 255 405 L 258 420 L 262 402 L 265 425 Z" fill="#1A0F0A"/>
-          <path d="M 1100 425 L 1105 405 L 1108 420 L 1112 402 L 1115 425 Z" fill="#1A0F0A"/>
-        </g>
-
-        <!-- VEHICLE (ute / truck silhouette) -->
-        <g transform="translate(380, 380)">
-          <!-- Truck bed/tray -->
-          <rect x="180" y="80" width="200" height="70" rx="4" fill="url(#vehicleBody)"/>
-          <rect x="180" y="80" width="200" height="14" fill="#2A2A2A" opacity="0.3"/>
-
-          <!-- Cab body -->
-          <path d="M 20 80 L 50 30 L 180 30 L 180 150 L 20 150 Z" fill="url(#vehicleBody)"/>
-
-          <!-- Windows -->
-          <path d="M 60 38 L 175 38 L 175 78 L 30 78 Z" fill="url(#window)"/>
-          <line x1="115" y1="38" x2="115" y2="78" stroke="#888" stroke-width="2"/>
-
-          <!-- Door line -->
-          <line x1="115" y1="88" x2="115" y2="140" stroke="#888" stroke-width="1.5"/>
-          <circle cx="155" cy="110" r="3" fill="#444"/>
-
-          <!-- Front grille / lights -->
-          <rect x="20" y="100" width="14" height="20" fill="#FFE066" opacity="0.9"/>
-          <rect x="20" y="125" width="14" height="14" fill="#2A2A2A"/>
-
-          <!-- Side detail (Quick Choice branding) -->
-          <rect x="35" y="160" width="150" height="3" fill="#D4A537"/>
-
-          <!-- Wheels -->
-          <circle cx="80" cy="160" r="30" fill="url(#wheel)"/>
-          <circle cx="80" cy="160" r="15" fill="#1A1A1A"/>
-          <circle cx="80" cy="160" r="8" fill="#3D3D3D"/>
-          <circle cx="320" cy="160" r="30" fill="url(#wheel)"/>
-          <circle cx="320" cy="160" r="15" fill="#1A1A1A"/>
-          <circle cx="320" cy="160" r="8" fill="#3D3D3D"/>
-
-          <!-- Wheel highlights -->
-          <ellipse cx="73" cy="153" rx="6" ry="3" fill="#7A7A7A" opacity="0.6"/>
-          <ellipse cx="313" cy="153" rx="6" ry="3" fill="#7A7A7A" opacity="0.6"/>
-
-          <!-- Shadow under vehicle -->
-          <ellipse cx="200" cy="195" rx="200" ry="8" fill="#000" opacity="0.4"/>
-        </g>
-
-        <!-- Light flare overlay -->
-        <ellipse cx="750" cy="320" rx="500" ry="100" fill="#FFF2C4" opacity="0.12"/>
-      </svg>
+      <img src="/hero.jpeg" alt="Quick Choice Finance — happy Australian client with their new asset" loading="eager" fetchpriority="high" />
 
       <!-- Floating stat cards -->
       <div class="hero-stat-card hero-stat-1">
