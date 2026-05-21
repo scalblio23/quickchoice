@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1977675273118337');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
+
 <title>Get Matched With a Lender — Quick Choice Finance Solutions</title>
 <meta name="description" content="Answer a few quick questions and we'll match you with your best asset finance options across 40+ Australian lenders.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1208,6 +1225,17 @@
           return;
         }
 
+        // Meta Pixel — track when user starts the quiz (clicks Yes on pre-qualifier)
+        if (question === 'intent' && value === 'yes' && typeof fbq === 'function') {
+          fbq('trackCustom', 'QuizStarted');
+        }
+
+        // Meta Pixel — track when user enters mobile/email (high-intent signal)
+        if (question === 'bestTime' && typeof fbq === 'function') {
+          // This fires when they reach the last question — about to submit
+          fbq('trackCustom', 'QuizCompleted');
+        }
+
         if (question === 'purpose') buildFlow();
 
         if (nextBtn) nextBtn.disabled = false;
@@ -1487,6 +1515,17 @@
     }
 
     console.log('Lead captured:', formData);
+
+    // Meta Pixel — Lead event with deduplication ID for CAPI parity
+    if (typeof fbq === 'function') {
+      const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      fbq('track', 'Lead', {
+        content_category: 'asset_finance',
+        content_name: 'quiz_completion',
+        value: 0,
+        currency: 'AUD'
+      }, { eventID: eventId });
+    }
 
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
     document.querySelector('.quiz-step[data-step="15"]').classList.add('active');
