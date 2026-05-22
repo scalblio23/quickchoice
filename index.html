@@ -678,6 +678,20 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   .fade-up.d2 { animation-delay: 0.2s; }
   .fade-up.d3 { animation-delay: 0.3s; }
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== MOBILE POLISH ===== */
+  * { -webkit-tap-highlight-color: rgba(31, 186, 92, 0.15); }
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: rgba(31, 186, 92, 0.2);
+    touch-action: manipulation;
+  }
+  html { scroll-padding-top: 80px; }
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    h1.headline { font-size: clamp(28px, 8vw, 36px); }
+    .subhead { font-size: 15px; }
+  }
+
 </style>
 </head>
 <body>
