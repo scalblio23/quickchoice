@@ -7,15 +7,26 @@ const PORT = process.env.PORT || 8080;
 // Environment variables (set in Railway Variables tab — NEVER in code)
 const TELNYX_API_KEY = process.env.TELNYX_API_KEY;
 const TELNYX_VERIFY_PROFILE_ID = process.env.TELNYX_VERIFY_PROFILE_ID;
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || '*')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
 
 if (!TELNYX_API_KEY || !TELNYX_VERIFY_PROFILE_ID) {
   console.error('⚠️  Missing env vars: TELNYX_API_KEY and TELNYX_VERIFY_PROFILE_ID required');
 }
 
-// CORS — only allow the Quick Choice domain to call this API
+// CORS — allow configured brand domains (Quick Choice, Lease Right, future brands)
+console.log('CORS allowed origins:', ALLOWED_ORIGINS);
 app.use(cors({
-  origin: ALLOWED_ORIGIN,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (server-to-server, curl, health checks)
+    if (!origin) return callback(null, true);
+    if (ALLOWED_ORIGINS.includes('*') || ALLOWED_ORIGINS.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`Origin ${origin} not allowed by CORS`));
+  },
   methods: ['POST', 'OPTIONS'],
   credentials: false,
 }));
