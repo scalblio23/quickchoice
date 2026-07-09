@@ -1338,6 +1338,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   async function submitLead() {
     const formData = {
       ...responses,
+      intent: 'yes',
       mobile: responses.mobile,
       verified: false,
       submittedAt: new Date().toISOString(),
