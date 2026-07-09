@@ -1076,27 +1076,6 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         </div>
       </div>
 
-      <!-- STEP 13b: SMS Verification -->
-      <div class="quiz-step" data-step="13b">
-        <h2 class="step-title">Verify your mobile number</h2>
-        <p class="verify-info">We've sent a verification code to <strong id="verifyMobileDisplay"></strong></p>
-        <div class="code-inputs" id="codeInputs">
-          <input type="tel" inputmode="numeric" maxlength="1" autocomplete="one-time-code" />
-          <input type="tel" inputmode="numeric" maxlength="1" />
-          <input type="tel" inputmode="numeric" maxlength="1" />
-          <input type="tel" inputmode="numeric" maxlength="1" />
-          <input type="tel" inputmode="numeric" maxlength="1" />
-        </div>
-        <div class="verify-status info" id="verifyStatus"></div>
-        <div class="resend-link">
-          Didn't get it? <button type="button" id="resendBtn" disabled>Resend code (30s)</button>
-        </div>
-        <div class="step-actions">
-          <button class="btn-back">Back</button>
-          <button class="btn-next" id="verifyNext" disabled>Verify and Continue</button>
-        </div>
-      </div>
-
       <!-- STEP 14: Best time to call -->
       <div class="quiz-step" data-step="14">
         <h2 class="step-title">If we need to follow up, when is the best time to reach you?</h2>
@@ -1172,17 +1151,15 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   // For local dev you could use http://localhost:8080
   const API_BASE = 'https://quickchoice-api-production.up.railway.app';
 
-  let verifiedMobile = null;
-  let resendTimer = null;
   let flowSequence = [];
   let currentIndex = 0;
   const responses = {};
 
   function buildFlow() {
     if (responses.purpose === 'personal') {
-      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, '13b', 14];
+      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     } else {
-      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, '13b', 14];
+      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     }
   }
   buildFlow();
@@ -1350,170 +1327,19 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   });
   if (consentBox) consentBox.addEventListener('change', checkContact);
   if (contactNext) {
-    contactNext.addEventListener('click', async (e) => {
+    contactNext.addEventListener('click', (e) => {
       e.preventDefault();
       if (contactNext.disabled) return;
-
-      contactNext.classList.add('loading');
-      contactNext.textContent = 'Sending code';
-
-      try {
-        const r = await fetch(API_BASE + '/api/send-code', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mobile: qMobile.value.trim() }),
-        });
-        const data = await r.json();
-        if (!r.ok) throw new Error(data.error || 'Could not send code');
-
-        // Show the verify step
-        document.getElementById('verifyMobileDisplay').textContent = qMobile.value.trim();
-        startResendTimer();
-        next();
-        // Auto-focus first code box
-        setTimeout(() => {
-          const first = document.querySelector('#codeInputs input');
-          if (first) first.focus();
-        }, 400);
-      } catch (err) {
-        alert('Could not send verification code: ' + err.message);
-      } finally {
-        contactNext.classList.remove('loading');
-        contactNext.textContent = 'Get My Car Loan Options';
-      }
+      next();
     });
   }
 
-
-  // ===== SMS VERIFICATION =====
-  const codeInputs = document.querySelectorAll('#codeInputs input');
-  const verifyNext = document.getElementById('verifyNext');
-  const verifyStatus = document.getElementById('verifyStatus');
-  const resendBtn = document.getElementById('resendBtn');
-
-  function getCode() {
-    return Array.from(codeInputs).map(i => i.value).join('');
-  }
-
-  function setVerifyStatus(msg, cls) {
-    if (!verifyStatus) return;
-    verifyStatus.textContent = msg;
-    verifyStatus.className = 'verify-status ' + (cls || 'info');
-  }
-
-  codeInputs.forEach((input, i) => {
-    input.addEventListener('input', (e) => {
-      const v = e.target.value.replace(/\D/g, '');
-      e.target.value = v.slice(-1);
-      e.target.classList.toggle('filled', !!e.target.value);
-      if (e.target.value && i < codeInputs.length - 1) {
-        codeInputs[i + 1].focus();
-      }
-      const code = getCode();
-      verifyNext.disabled = code.length !== 5;
-      if (code.length === 5) {
-        // Auto-attempt verification
-        attemptVerify();
-      }
-    });
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && !e.target.value && i > 0) {
-        codeInputs[i - 1].focus();
-      }
-    });
-    input.addEventListener('paste', (e) => {
-      e.preventDefault();
-      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 5);
-      pasted.split('').forEach((d, idx) => {
-        if (codeInputs[idx]) {
-          codeInputs[idx].value = d;
-          codeInputs[idx].classList.add('filled');
-        }
-      });
-      const code = getCode();
-      verifyNext.disabled = code.length !== 5;
-      if (code.length === 5) attemptVerify();
-    });
-  });
-
-  async function attemptVerify() {
-    const code = getCode();
-    if (code.length !== 5) return;
-
-    verifyNext.classList.add('loading');
-    verifyNext.disabled = true;
-    setVerifyStatus('Checking code...', 'info');
-
-    try {
-      const r = await fetch(API_BASE + '/api/check-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobile: qMobile.value.trim(), code }),
-      });
-      const data = await r.json();
-
-      if (r.ok && data.verified) {
-        verifiedMobile = data.phone;
-        setVerifyStatus('Verified!', 'success');
-        setTimeout(next, 600);
-      } else {
-        setVerifyStatus(data.error || 'Incorrect code. Try again.', 'error');
-        codeInputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
-        codeInputs[0].focus();
-        verifyNext.disabled = true;
-      }
-    } catch (err) {
-      setVerifyStatus('Network error. Try again.', 'error');
-    } finally {
-      verifyNext.classList.remove('loading');
-    }
-  }
-
-  if (verifyNext) verifyNext.addEventListener('click', attemptVerify);
-
-  function startResendTimer() {
-    if (!resendBtn) return;
-    let secs = 30;
-    resendBtn.disabled = true;
-    resendBtn.textContent = 'Resend code (' + secs + 's)';
-    clearInterval(resendTimer);
-    resendTimer = setInterval(() => {
-      secs -= 1;
-      if (secs <= 0) {
-        clearInterval(resendTimer);
-        resendBtn.disabled = false;
-        resendBtn.textContent = 'Resend code';
-      } else {
-        resendBtn.textContent = 'Resend code (' + secs + 's)';
-      }
-    }, 1000);
-  }
-
-  if (resendBtn) {
-    resendBtn.addEventListener('click', async () => {
-      resendBtn.disabled = true;
-      setVerifyStatus('Sending new code...', 'info');
-      try {
-        const r = await fetch(API_BASE + '/api/send-code', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mobile: qMobile.value.trim() }),
-        });
-        if (!r.ok) throw new Error();
-        setVerifyStatus('New code sent', 'success');
-        startResendTimer();
-      } catch {
-        setVerifyStatus('Could not resend. Try again in a moment.', 'error');
-        resendBtn.disabled = false;
-      }
-    });
-  }
 
   async function submitLead() {
     const formData = {
       ...responses,
-      mobile: verifiedMobile || responses.mobile,
-      verified: !!verifiedMobile,
+      mobile: responses.mobile,
+      verified: false,
       submittedAt: new Date().toISOString(),
       source: 'quickchoice-quiz',
     };
