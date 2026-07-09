@@ -5,6 +5,7 @@ FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/index.html
 COPY quiz.html /usr/share/nginx/html/quiz.html
 COPY hero.jpeg /usr/share/nginx/html/hero.jpeg
+COPY hero.png /usr/share/nginx/html/hero.png
 
 # Lender logos
 COPY pepper.png /usr/share/nginx/html/pepper.png
