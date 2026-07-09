@@ -170,6 +170,7 @@ app.post('/api/submit-lead', rateLimit, async (req, res) => {
       firstName: lead.firstName || '',
       mobile: lead.mobile || '',
       email: lead.email || '',
+      intent: lead.intent || '',
       assetType: lead.assetType || '',
       purpose: lead.purpose || '',
       abnDuration: lead.abnDuration || '',
