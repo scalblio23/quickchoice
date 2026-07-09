@@ -1,5 +1,6 @@
 FROM nginx:alpine
 
+# Cache bust: 2026-07-09
 # Copy site files
 COPY index.html /usr/share/nginx/html/index.html
 COPY quiz.html /usr/share/nginx/html/quiz.html
