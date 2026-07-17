@@ -1100,6 +1100,17 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
       </div>
 
       <!-- SUCCESS -->
+      <!-- INCOME DISQUALIFIED -->
+      <div class="quiz-step" id="income-disqualified">
+        <div class="success-screen">
+          <div class="success-icon" style="background: #F1F4F9;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5A6B82" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h2>Thanks for your interest!</h2>
+          <p>At this stage we aren't able to find you a suitable match, but we hope to help you in the future.</p>
+        </div>
+      </div>
+
       <div class="quiz-step" data-step="15">
         <div class="success-screen">
           <div class="success-icon">
@@ -1247,7 +1258,18 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   document.querySelectorAll('.btn-next').forEach(btn => {
     if (btn.id === 'contactNext' || btn.id === 'finalSubmit') return;
     btn.addEventListener('click', (e) => {
-      if (!btn.disabled) next();
+      if (btn.disabled) return;
+      // Income disqualification check
+      const currentStep = flowSequence[currentIndex];
+      if (currentStep === 10) {
+        const income = parseInt(document.getElementById('incomeSlider').value);
+        if (income < 40000) {
+          document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+          document.getElementById('income-disqualified').classList.add('active');
+          return;
+        }
+      }
+      next();
     });
   });
 
