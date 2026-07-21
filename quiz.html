@@ -641,6 +641,32 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     box-shadow: 0 0 0 3px rgba(165,230,53,0.25);
   }
   .single-field input::placeholder { color: #A8B2C2; font-weight: 400; }
+  .single-field textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+    min-height: 110px;
+    box-sizing: border-box;
+  }
+  .single-field textarea:focus {
+    outline: none;
+    border-color: var(--accent-deep);
+    box-shadow: 0 0 0 3px rgba(165,230,53,0.25);
+  }
+  .single-field textarea::placeholder { color: #A8B2C2; }
+  .char-hint {
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-align: right;
+    margin-top: 6px;
+  }
 
 
   /* ===== VERIFICATION STEP ===== */
@@ -1099,6 +1125,20 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         </div>
       </div>
 
+      <!-- STEP 15: How can we help -->
+      <div class="quiz-step" data-step="15">
+        <h2 class="step-title">Please describe how we can help?</h2>
+        <p class="step-sub">e.g. Looking to find a better rate</p>
+        <div class="single-field">
+          <textarea id="qHelpDescription" name="helpDescription" placeholder="e.g. Looking to find a better rate" rows="4"></textarea>
+          <div class="char-hint"><span id="helpCharCount">0</span> / 15 min</div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back">Back</button>
+          <button class="btn-next" id="helpSubmit" disabled>Continue</button>
+        </div>
+      </div>
+
       <!-- SUCCESS -->
       <!-- INCOME DISQUALIFIED -->
       <div class="quiz-step" id="income-disqualified">
@@ -1111,7 +1151,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         </div>
       </div>
 
-      <div class="quiz-step" data-step="15">
+      <div class="quiz-step" data-step="16">
         <div class="success-screen">
           <div class="success-icon">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1168,9 +1208,9 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
 
   function buildFlow() {
     if (responses.purpose === 'personal') {
-      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 15, 13, 14];
     } else {
-      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 13, 14];
     }
   }
   buildFlow();
@@ -1234,7 +1274,6 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
 
         // Meta Pixel — track when user enters mobile/email (high-intent signal)
         if (question === 'bestTime' && typeof fbq === 'function') {
-          // This fires when they reach the last question — about to submit
           fbq('trackCustom', 'QuizCompleted');
         }
 
@@ -1256,7 +1295,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   });
 
   document.querySelectorAll('.btn-next').forEach(btn => {
-    if (btn.id === 'contactNext' || btn.id === 'finalSubmit') return;
+    if (btn.id === 'contactNext' || btn.id === 'finalSubmit' || btn.id === 'helpSubmit') return;
     btn.addEventListener('click', (e) => {
       if (btn.disabled) return;
       // Income disqualification check
@@ -1356,6 +1395,27 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     });
   }
 
+  // Help description (step 15)
+  const qHelpDescription = document.getElementById('qHelpDescription');
+  const helpCharCount = document.getElementById('helpCharCount');
+  const helpSubmit = document.getElementById('helpSubmit');
+  if (qHelpDescription) {
+    qHelpDescription.addEventListener('input', () => {
+      const len = qHelpDescription.value.trim().length;
+      if (helpCharCount) helpCharCount.textContent = len;
+      const valid = len >= 15;
+      if (helpSubmit) helpSubmit.disabled = !valid;
+      if (valid) responses.helpDescription = qHelpDescription.value.trim();
+    });
+  }
+  if (helpSubmit) {
+    helpSubmit.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (helpSubmit.disabled) return;
+      next();
+    });
+  }
+
 
   async function submitLead() {
     const formData = {
@@ -1391,7 +1451,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     }
 
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
-    document.querySelector('.quiz-step[data-step="15"]').classList.add('active');
+    document.querySelector('.quiz-step[data-step="16"]').classList.add('active');
     progressFill.style.width = '100%';
     progressPct.textContent = '100%';
     currentStepEl.textContent = flowSequence.length;
