@@ -1135,7 +1135,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         </div>
         <div class="step-actions">
           <button class="btn-back">Back</button>
-          <button class="btn-next" id="helpSubmit" disabled>Submit</button>
+          <button class="btn-next" id="helpSubmit" disabled>Continue</button>
         </div>
       </div>
 
@@ -1208,9 +1208,9 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
 
   function buildFlow() {
     if (responses.purpose === 'personal') {
-      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+      flowSequence = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 15, 13, 14];
     } else {
-      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+      flowSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 13, 14];
     }
   }
   buildFlow();
@@ -1282,7 +1282,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         if (nextBtn) nextBtn.disabled = false;
 
         if (stepNumber === 14) {
-          setTimeout(next, 350);
+          setTimeout(submitLead, 400);
           return;
         }
         setTimeout(next, 350);
@@ -1412,7 +1412,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     helpSubmit.addEventListener('click', (e) => {
       e.preventDefault();
       if (helpSubmit.disabled) return;
-      submitLead();
+      next();
     });
   }
 
