@@ -183,6 +183,7 @@ app.post('/api/submit-lead', rateLimit, async (req, res) => {
       state: lead.state || '',
       postcode: lead.postcode || '',
       bestTime: lead.bestTime || '',
+      helpDescription: lead.helpDescription || '',
       verified: lead.verified ? 'TRUE' : 'FALSE',
       source: lead.source || 'quickchoice-quiz',
     };
